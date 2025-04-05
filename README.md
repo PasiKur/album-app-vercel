@@ -43,7 +43,7 @@ We also add a new script for deployment to package.json. So we separate it from 
 
 ```js
 // used by Vercel deployment (app.js is the entry point for serverless functions)
-"start:vercel": "node app.js",
+"start:": "node app.js",
 ```
 
 ### b) Pushing project to GitHub (instead of GitLab...)
@@ -84,7 +84,34 @@ TEST_MONGODB_URI is not used in deployment, because now we are running the actua
 
 ![alt text](screenshots/E08_4_4_env_variables.png)
 
+To complete the deployment -> **Deploy** button was clicked.
 
-sitten painetaan deploy nappia...
+### d) Disabling middleware 'authUser' temporarily for deployment
 
-    "start": "cross-env RUNTIME_ENV=production NODE_ENV=production node server.js",
+The **authUser** middleware was used for protecting the route **/api/albums**.
+Because Vercel production environment is serverless, this session-based authentication did not work correctly.
+
+So I decided to temporarily remove **authUser** from route **GET/api/albums** in **routes/albums.js**.
+
+```js
+// modified for deployment testing (authentication skipped)
+router.get('/', getAllAlbums)
+```
+
+After this, testing the route Vercel deployment was successful in browser:
+
+![Vercel browser success](screenshots/E08_4_6_vercel_browser_success.png)
+
+### Summary
+
+Even though I couldn't manage to complete the exercise with using GitLab CI/CD pipeline features, these functionalities were still reached:
+
+- Vercel deployment -> ok
+- route **api/albums** accessible (with authUser disabled...) -> ok
+- configurations and environment variables set up correctly -> ok
+- GitHub repo created with all project files as source code -> ok
+
+App: https://album-app-vercel.vercel.app/api/albums  
+GitHub repository: (https://github.com/PasiKur/album-app-vercel)
+
+Task4 finally finished.

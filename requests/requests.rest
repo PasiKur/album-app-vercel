@@ -1,0 +1,82 @@
+@port = {{$dotenv PORT}}
+@host = http://localhost
+@hostname = {{host}}:{{port}}
+@token_user = {{login.response.body.token}}
+
+
+### Login (and get token)
+# @name login
+POST {{hostname}}/api/login
+Content-Type: application/json
+
+{
+    "email" : "pasi@pasik",
+    "password" : "salasana"
+}
+
+
+// 1) CRUD OPERATIONS:
+### a) GET - Get all albums (getAllAlbums)
+GET {{hostname}}/api/albums
+
+
+### b) GET - Get one album by ID (getAlbumById)
+GET {{hostname}}/api/albums/67d3fc4cd5a1b99374b2572d
+
+
+### c) POST - Add album (createAlbum)
+# @name create_album
+POST {{hostname}}/api/albums
+Content-Type: application/json
+Authorization: Bearer {{token_user}}
+
+{
+  "artist": "Lassi Laulaja",
+  "title": "Raikulin Ralli",
+  "year": 2025,
+  "genre": "Country",
+  "tracks": 10
+}
+
+
+### d) PUT - Update album (updateAlbum)
+# @name update_album
+PUT {{hostname}}/api/albums/67baebe7dd57d3ed2a6bc644
+Content-Type: application/json
+Authorization: Bearer {{token_user}}
+
+{
+  "artist": "Yiruma",
+  "title": "First Love",
+  "year": 2001,
+  "genre": "Classic",
+  "tracks": 15
+}
+
+
+### e) DELETE - Delete album /deleteAlbum)
+# @name delete_album
+DELETE {{hostname}}/api/albums/67dadbcf0baba5002e7ae687
+Authorization: Bearer {{token_user}}
+
+
+// 2) SORTING:
+### Sorting feature (for example by artist, title, year...)
+GET {{hostname}}/api/albums/all?sort=genre
+
+
+// 3) FILTERING:
+### Filter by genre
+GET {{hostname}}/api/albums/all?genre=Pop
+
+### a) Filter for the release year (numeric filter)
+GET {{hostname}}/api/albums/all?numericFilters=year<1990&sort=artist,-title
+
+### b) Filter by user defined fields
+GET {{hostname}}/api/albums/all?fields=artist,year
+
+### c) Filter with partial patterns
+GET {{hostname}}/api/albums/all?title=al
+
+### d) Filter between two years (for example released between 1969 and 1985)
+GET {{hostname}}/api/albums/all?startYear=1969&endYear=1985

@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  .row.justify-content-center
+    .col-md-6
+      .card
+        .card-body
+          h1.card-title.mb-4.text-center Registration Form
+          form(action="/register", method="post")
+            .mb-3
+              label.form-label(for="name") Name
+              input#name.form-control(name="name", type="text", autocomplete="name", required)
+            .mb-3
+              label.form-label(for="username") Username
+              input#username.form-control(name="username", type="text", autocomplete="username", required)
+            .mb-3
+              label.form-label(for="email") Email
+              input#email.form-control(name="email", type="email", autocomplete="email", required)
+            .mb-3
+              label.form-label(for="password") Password
+              input#password.form-control(name="password", type="password", autocomplete="new-password", required)
+            .d-grid.gap-2
+              button.btn.btn-primary(type="submit") Register
+          .text-center.mt-3
+            a.text-decoration-none(href="/") Back to Home

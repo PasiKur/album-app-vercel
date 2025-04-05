@@ -1,0 +1,43 @@
+@port = {{$dotenv PORT}}
+@host = http://localhost
+@hostname = {{host}}:{{port}}
+@token_user = {{login.response.body.token}}
+
+### Login (and get token)
+# @name login
+POST {{hostname}}/api/login
+Content-Type: application/json
+
+{
+    "email" : "bat@bat",
+    "password" : "password"
+}
+
+
+### Create/register a new REGULAR user (createUser)
+# @name create_user
+POST {{hostname}}/api/users/register
+Content-Type: application/json
+
+{
+  "role": "user",
+  "name": "Batman",
+  "email" : "bat@bat",
+  "password" : "password",
+  "password_confirmation": "password"
+}
+
+### Get all users (getUsers)
+# @name get_users
+GET {{hostname}}/api/users/
+
+
+### Get single user (getSingleUser)
+# @name get_user
+GET {{hostname}}/api/users/67dc49f471ac5cace6e7387e
+
+
+### Delete user (deleteUser)
+# @name delete_user
+DELETE {{hostname}}/api/users/67dc4a6b71ac5cace6e73881
+Authorization: Bearer {{token_user}}

@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  .text-center
+    if message
+      .alert.alert-success.mb-4(role="alert")= message
+    h1.mb-4 Welcome! 
+    .d-grid.gap-3.col-6.mx-auto
+      a.btn.btn-primary(href="/login") Log in
+      a.btn.btn-outline-primary(href="/register") Sign up

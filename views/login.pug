@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .row.justify-content-center
+    .col-md-6
+      .card
+        .card-body
+          h1.card-title.mb-4.text-center Log in
+          if messages && messages.length > 0
+            .alert.alert-danger.mb-3= messages[0]
+          form(action="/login/password", method="post")
+            .mb-3
+              label.form-label(for="email") Email
+              input#email.form-control(name="email", type="email", autocomplete="email", required)
+            .mb-3
+              label.form-label(for="password") Password
+              input#password.form-control(name="password", type="password", autocomplete="current-password", required)
+            .d-grid.gap-2
+              button.btn.btn-primary(type="submit") Log in
+          .text-center.mt-3
+            a.text-decoration-none(href="/") Back to Home

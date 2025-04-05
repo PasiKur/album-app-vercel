@@ -6,8 +6,8 @@
   "scripts": {
     "format:check": "prettier --check \"**/*.{js,ts,json,css,md}\"",
     "format:write": "prettier --write \"**/*.{js,ts,json,css,md}\"",
-    "start": "cross-env RUNTIME_ENV=production NODE_ENV=production node server.js",
-    "start:vercel": "node app.js",  
+
+    "start:": "node app.js",  
     "dev": "cross-env RUNTIME_ENV=development NODE_ENV=production nodemon server.js",
     "test": "cross-env RUNTIME_ENV=test NODE_ENV=production vitest tests",
     "test:coverage": "cross-env RUNTIME_ENV=test NODE_ENV=production vitest tests --coverage",

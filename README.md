@@ -87,3 +87,4 @@ TEST_MONGODB_URI is not used in deployment, because now we are running the actua
 
 sitten painetaan deploy nappia...
 
+    "start": "cross-env RUNTIME_ENV=production NODE_ENV=production node server.js",

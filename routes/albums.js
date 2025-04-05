@@ -13,7 +13,7 @@ import {
 const router = express.Router() // create express router
 
 // All logged in users can access these album routes
-router.get('/', authUser, getAllAlbums)
+router.get('/', getAllAlbums)
 router.get('/all', authUser, getAlbumsQuery)
 router.get('/:id', authUser, getAlbumById)
 router.post('/', authUser, createAlbum)  // create album: all logged in users
